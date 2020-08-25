@@ -15,3 +15,8 @@ For the SHA-2 hash functions (i.e. SHA-256 and SHA-512), we rely on OpenSSL. Mak
 ### License
 
 This reference implementation was written by Andreas Hülsing and Joost Rijneveld. All included code is available under the CC0 1.0 Universal Public Domain Dedication.
+
+
+### What has changed
+
+Add total heigh 8 and 32 to level 1, 2 and 4 (NOTE: height 32 with level 1 don't work)
