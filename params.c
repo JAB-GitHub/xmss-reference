@@ -364,11 +364,12 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000012:
         case 0x00000015:
             params->full_height = 20;
+            break;
             
         case 0x00000016:
             params->full_height = 32;
-
             break;
+            
         default:
             return -1;
     }
