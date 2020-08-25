@@ -15,6 +15,9 @@ int xmss_str_to_oid(uint32_t *oid, const char *s)
     else if (!strcmp(s, "XMSS-SHA2_20_256")) {
         *oid = 0x00000003;
     }
+    else if (!strcmp(s, "XMSS-SHA2_32_256")) {
+        *oid = 0x00000016;
+    }
     else if (!strcmp(s, "XMSS-SHA2_10_512")) {
         *oid = 0x00000004;
     }
@@ -257,6 +260,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000001:
         case 0x00000002:
         case 0x00000003:
+        case 0x00000016:
         case 0x00000004:
         case 0x00000005:
         case 0x00000006:
@@ -304,6 +308,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000001:
         case 0x00000002:
         case 0x00000003:
+        case 0x00000016:
 
         case 0x00000007:
         case 0x00000008:
@@ -359,6 +364,9 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000012:
         case 0x00000015:
             params->full_height = 20;
+            
+        case 0x00000016:
+            params->full_height = 32;
 
             break;
         default:
