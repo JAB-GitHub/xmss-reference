@@ -6,7 +6,10 @@
 
 int xmss_str_to_oid(uint32_t *oid, const char *s)
 {
-    if (!strcmp(s, "XMSS-SHA2_10_256")) {
+    if (!strcmp(s, "XMSS-SHA2_8_256")) {
+        *oid = 0x00000017;
+    }
+    else if (!strcmp(s, "XMSS-SHA2_10_256")) {
         *oid = 0x00000001;
     }
     else if (!strcmp(s, "XMSS-SHA2_16_256")) {
@@ -80,12 +83,24 @@ int xmss_str_to_oid(uint32_t *oid, const char *s)
 
 int xmssmt_str_to_oid(uint32_t *oid, const char *s)
 {
-    if (!strcmp(s, "XMSSMT-SHA2_20/2_256")) {
-        *oid = 0x00000001;
+    if (!strcmp(s, "XMSSMT-SHA2_8/2_256")) {
+        *oid = 0x00000039;
     }
+    else if (!strcmp(s, "XMSSMT-SHA2_8/4_256")) {
+        *oid = 0x0000003b;
+    }
+    else if (!strcmp(s, "XMSSMT-SHA2_20/2_256")) {
+        *oid = 0x00000001;
+    }  
     else if (!strcmp(s, "XMSSMT-SHA2_20/4_256")) {
         *oid = 0x00000002;
     }
+    else if (!strcmp(s, "XMSSMT-SHA2_32/2_256")) {
+        *oid = 0x0000003a;
+    } 
+    else if (!strcmp(s, "XMSSMT-SHA2_32/4_256")) {
+        *oid = 0x0000003c;
+    } 
     else if (!strcmp(s, "XMSSMT-SHA2_40/2_256")) {
         *oid = 0x00000003;
     }
@@ -257,6 +272,7 @@ int xmssmt_str_to_oid(uint32_t *oid, const char *s)
 int xmss_parse_oid(xmss_params *params, const uint32_t oid)
 {
     switch (oid) {
+        case 0x00000017:
         case 0x00000001:
         case 0x00000002:
         case 0x00000003:
@@ -309,6 +325,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000002:
         case 0x00000003:
         case 0x00000016:
+        case 0x00000017:
 
         case 0x00000007:
         case 0x00000008:
@@ -336,6 +353,10 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
             return -1;
     }
     switch (oid) {
+        case 0x00000017:
+            params->full_height = 8;
+            break;    
+            
         case 0x00000001:
         case 0x00000004:
         case 0x00000007:
@@ -411,6 +432,10 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000026:
         case 0x00000027:
         case 0x00000028:
+        case 0x00000039:
+        case 0x0000003a:
+        case 0x0000003b:
+        case 0x0000003c:
             params->func = XMSS_SHA2;
             break;
 
@@ -504,6 +529,10 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000002e:
         case 0x0000002f:
         case 0x00000030:
+        case 0x00000039:
+        case 0x0000003a:
+        case 0x0000003b:
+        case 0x0000003c:
             params->n = 32;
             params->padding_len = 32;
             break;
@@ -533,6 +562,12 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
             return -1;
     }
     switch (oid) {
+        case 0x00000039:
+        case 0x0000003b:
+            params->full_height = 8;
+            break;
+   
+        
         case 0x00000001:
         case 0x00000002:
 
@@ -555,6 +590,11 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x00000032:
             params->full_height = 20;
             break;
+            
+        case 0x0000003a:
+        case 0x0000003c:
+            params->full_height = 32;
+            break;    
 
         case 0x00000003:
         case 0x00000004:
@@ -634,6 +674,8 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000002b:
         case 0x00000031:
         case 0x00000033:
+        case 0x00000039:
+        case 0x0000003a:
             params->d = 2;
             break;
 
@@ -651,6 +693,8 @@ int xmssmt_parse_oid(xmss_params *params, const uint32_t oid)
         case 0x0000002c:
         case 0x00000032:
         case 0x00000034:
+        case 0x0000003b:
+        case 0x0000003c:
             params->d = 4;
             break;
 
