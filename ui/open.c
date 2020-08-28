@@ -69,9 +69,62 @@ int main(int argc, char **argv) {
     fseek(sm_file, 0, SEEK_SET);
     fread(pk, 1, XMSS_OID_LEN + params.pk_bytes, keypair_file);
     fread(sm, 1, smlen, sm_file);
-
+    
+     /* 
+    * STAR timer
+    */
+    
+	//Abertura do arquivo que vai receber o tempo de criação das chaves
+	FILE *file_time = fopen("Time to mult verify.txt", "a"); 
+	
+	//Verificação se o arquivo abriu
+	if (file_time == NULL){
+		printf("Erro para abrir o arquivo!\n");
+		return -1;
+	}
+	
+	//Abertura do arquivo que vai receber o clock para a criação das chaves
+	FILE *file_time1 = fopen("Clock to mult verify.txt", "a"); 
+	
+	//Verificação se o arquivo abriu
+	if (file_time1 == NULL){
+		printf("Erro para abrir o arquivo!\n");
+		return -1;
+	}	
+	
+	long long int clock;
+	double time_spent = 0.0; //Varaiável que receberá o valor do tempo de execução
+	clock_t begin = clock(); //Comça a contagem de operações de máquina
+    /*
+    * Will cont time to execute XMSS_SIGN_OPEN
+    */
+    
     ret = XMSS_SIGN_OPEN(m, &mlen, sm, smlen, pk);
+    
+     /*
+    * STOP timer
+    */
+    fclose(stdout);
 
+	clock_t end = clock(); //Para a contagem de operações
+	
+	time_spent +=(double)(end - begin) / CLOCKS_PER_SEC; //Divide a quantidades de operações pela frequência do clock para obter o tempo em segundo
+	
+	clock = end - begin;
+	
+	// Regista no arquivo o tempo para criação do arquivo
+	fprintf(file_time,"%lf;", time_spent);
+	
+	// Regista no arquivo o clock para criação do arquivo
+	fprintf(file_time1,"%lld;", clock);
+	
+	//Fecha os arquivos
+	fclose(file_time);
+	fclose(file_time1);
+    /*
+    * Save time and clock in .txt
+    */
+    
     if (ret) {
         printf("Verification failed!\n");
     }
