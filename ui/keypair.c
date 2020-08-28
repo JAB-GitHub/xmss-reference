@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
-#include<time.h>
+#include <time.h>
 
 #include "../params.h"
 #include "../xmss.h"
