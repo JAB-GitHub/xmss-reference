@@ -18,7 +18,7 @@ int xmss_str_to_oid(uint32_t *oid, const char *s)
     else if (!strcmp(s, "XMSS-SHA2_20_256")) {
         *oid = 0x00000003;
     }
-    else if (!strcmp(s, "XMSS-SHA2_32_256")) {
+    else if (!strcmp(s, "XMSS-SHA2_31_256")) {
         *oid = 0x00000016;
     }
     else if (!strcmp(s, "XMSS-SHA2_10_512")) {
@@ -388,7 +388,7 @@ int xmss_parse_oid(xmss_params *params, const uint32_t oid)
             break;
             
         case 0x00000016:
-            params->full_height = 32;
+            params->full_height = 31;
             break;
             
         default:
