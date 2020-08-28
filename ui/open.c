@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 		return -1;
 	}	
 	
-	long long int clock;
+	long long int nun_clock;
 	double time_spent = 0.0; //Varaiável que receberá o valor do tempo de execução
 	clock_t begin = clock(); //Comça a contagem de operações de máquina
     /*
@@ -111,13 +111,13 @@ int main(int argc, char **argv) {
 	
 	time_spent +=(double)(end - begin) / CLOCKS_PER_SEC; //Divide a quantidades de operações pela frequência do clock para obter o tempo em segundo
 	
-	clock = end - begin;
+	nun_clock =(long long int)(end - begin);
 	
 	// Regista no arquivo o tempo para criação do arquivo
 	fprintf(file_time,"%lf;", time_spent);
 	
 	// Regista no arquivo o clock para criação do arquivo
-	fprintf(file_time1,"%lld;", clock);
+	fprintf(file_time1,"%lld;", nun_clock);
 	
 	//Fecha os arquivos
 	fclose(file_time);
