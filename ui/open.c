@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
      /*
     * STOP timer
     */
-    fclose(stdout);
+   
 
 	clock_t end = clock(); //Para a contagem de operações
 	
